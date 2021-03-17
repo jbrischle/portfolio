@@ -1,0 +1,29 @@
+<div>
+  <mat-form-field *ngIf="enableColumnSelection" appearance="fill">
+    <mat-label>Columns</mat-label>
+    <mat-select [(value)]="columnsDisplay" multiple>
+      <mat-option *ngFor="let topping of columnsAvailable" [value]="topping">{{topping}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button *ngIf="enableColumnSelection" mat-icon-button color="primary" (click)="resetDisplayList()">
+    <mat-icon>replay</mat-icon>
+  </button>
+
+  <mat-form-field *ngIf="enableFilter" appearance="fill">
+    <mat-label>Filter</mat-label>
+    <input matInput (keydown.enter)="applyFilter($event)" placeholder="First Brand | Second Brand" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsDisplay">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>
+      <td mat-cell *matCellDef="let element" [innerHTML]="element[column] | Portfolio:column">  </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsDisplay; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsDisplay;" (click)="clickedRow(row)"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
