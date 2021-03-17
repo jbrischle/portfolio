@@ -13,11 +13,13 @@
              [columnsDisplay]="['name', 'currencyCode','tickerSymbol', 'isin', 'wkn']"
              (selectedRow)="selectRow($event)"></app-table>
 
-  <canvas baseChart width="400" height="400"
+<div>
+  <canvas baseChart width="800" height="400"
           [datasets]="lineChartData"
           [labels]="lineChartLabels"
           [chartType]="lineChartType"
   ></canvas>
+</div>
 </div>
 
 

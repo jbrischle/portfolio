@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   securities;
   lineChartData: ChartDataSets[] = [];
   lineChartLabels: Label[] = [];
+  showChart = false;
 
   constructor(readonly backend: BackendService) {
   }
@@ -26,15 +27,18 @@ export class AppComponent implements OnInit {
   }
 
   selectRow(event: any) {
-    let lineChartData = {
+    let lineChartData: ChartDataSets[] = [{
       data: [],
-      label: 'series a'
-    }
+      label: event.name
+    }]
+    let lineChartLabels: Label[] = [];
     event?.prices?.price.forEach(value => {
-      lineChartData.data.push(value['@_v'])
-      this.lineChartLabels.push(value['@_t']);
+      lineChartData[0].data.push(value['@_v'])
+      lineChartLabels.push(value['@_t']);
     })
-    this.lineChartData.push(lineChartData);
+    this.lineChartData = lineChartData;
+    this.lineChartLabels = lineChartLabels;
+    console.log(this.lineChartData)
   }
 
   public lineChartLegend = true;
