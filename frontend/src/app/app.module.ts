@@ -12,13 +12,16 @@ import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'home', pathMatch: 'full'
+    path: '', redirectTo: 'securities', pathMatch: 'full'
   },
   {
-    path: 'home', loadChildren: () => import('./pages/securities/securities.module').then(m => m.SecuritiesModule)
+    path: 'securities', loadChildren: () => import('./pages/securities/securities.module').then(m => m.SecuritiesModule)
   },
   {
-    path: '**', redirectTo: 'home', pathMatch: 'full'
+    path: 'accounts', loadChildren: () => import('./pages/accounts/accounts.module').then(m => m.AccountsModule)
+  },
+  {
+    path: '**', redirectTo: 'securities', pathMatch: 'full'
   }
 ];
 
