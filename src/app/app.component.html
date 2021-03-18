@@ -1,7 +1,10 @@
 <mat-drawer-container #drawerContainer>
   <mat-drawer #sideNav *ngIf="sideNavShow" mode="side" opened>
-    Drawer content
-
+    <mat-list>
+      <mat-list-item routerLink="home">Securities</mat-list-item>
+      <mat-list-item> Salt</mat-list-item>
+      <mat-list-item> Paprika</mat-list-item>
+    </mat-list>
   </mat-drawer>
 
   <mat-drawer-content>
@@ -12,20 +15,8 @@
       <span>Portfolio</span>
     </div>
 
-    <div class="content" role="main">
-      <app-table [data]="securities"
-                 [columnsDisplay]="['name', 'currencyCode','tickerSymbol', 'isin', 'wkn']"
-                 (selectedRow)="selectRow($event)"></app-table>
+    <router-outlet></router-outlet>
 
-      <div>
-        <canvas baseChart width="800" height="400"
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [chartType]="lineChartType"
-                [legend]="lineChartLegend"
-        ></canvas>
-      </div>
-    </div>
   </mat-drawer-content>
 </mat-drawer-container>
 

@@ -1,30 +1,40 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatTableModule} from '@angular/material/table';
-import {TableModule} from './components/table/table.module';
-import {ChartsModule} from 'ng2-charts';
-import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatCommonModule} from '@angular/material/core';
+import {SecuritiesModule} from './pages/securities/securities.module';
+import {MatButtonModule} from '@angular/material/button';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterModule, Routes} from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '', redirectTo: 'home', pathMatch: 'full'
+  },
+  {
+    path: 'home', loadChildren: () => import('./pages/securities/securities.module').then(m => m.SecuritiesModule)
+  },
+  {
+    path: '**', redirectTo: 'home', pathMatch: 'full'
+  }
+];
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    MatIconModule,
+    RouterModule.forRoot(routes),
     MatSidenavModule,
-    ChartsModule,
-    TableModule,
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatButtonModule
+    MatListModule,
+    MatIconModule,
+    MatCommonModule,
+    SecuritiesModule,
+    MatButtonModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

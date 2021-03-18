@@ -1,0 +1,14 @@
+<div class="content" role="main">
+  <app-table [data]="securities"
+             [columnsDisplay]="['name', 'currencyCode','tickerSymbol', 'isin', 'wkn']"
+             (selectedRow)="selectRow($event)"></app-table>
+
+  <div>
+    <canvas baseChart width="800" height="400"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [chartType]="lineChartType"
+            [legend]="lineChartLegend"
+    ></canvas>
+  </div>
+</div>
