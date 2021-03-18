@@ -1,0 +1,14 @@
+{
+  "language_de": "Deutsch",
+  "language_en": "English",
+  "language_ja": "日本語",
+  "portfolio": "ポートフォリオ",
+  "name": "名前",
+  "currencyCode": "通貨",
+  "tickerSymbol": "ティッカーシンボル",
+  "isin": "ISIN",
+  "wkn": "WKN",
+  "securities": "証券",
+  "accounts": "アカウント",
+  "isRetired": "閉鎖"
+}

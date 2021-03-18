@@ -1,0 +1,14 @@
+{
+  "language_de": "Deutsch",
+  "language_en": "English",
+  "language_jp": "日本語",
+  "portfolio": "Portfolio",
+  "name": "Name",
+  "currencyCode": "Währung",
+  "tickerSymbol": "Börsenkürzel Symbol",
+  "isin": "ISIN",
+  "wkn": "WKN",
+  "securities": "Wertpapiere",
+  "accounts": "Konten",
+  "isRetired": "Geschlossen"
+}

@@ -9,7 +9,7 @@ export class CustomPipe implements PipeTransform {
 
     if (tableValue) {
       if (this.checkIfUrl(tableValue)) {
-        return '<a href="' + tableValue + '" target="_blank">Feed URL</a>'
+        return '<a href="' + tableValue + '" target="_blank">URL</a>'
       }
       if (columnName === 'tickerSymbol') {
         return '<a href="https://finance.yahoo.com/quote/' + tableValue + '" target="_blank">' + tableValue + '</a>'

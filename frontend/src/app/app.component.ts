@@ -1,4 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {SupportedLanguage} from './supported-language';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +14,17 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   sideNavShow: boolean = false;
   title = 'portfolio';
+  languages: string[] = [];
 
-  constructor(private renderer: Renderer2) {
+  constructor(private readonly renderer: Renderer2, private readonly translate: TranslateService) {
   }
 
   ngOnInit(): void {
+    for (const language in SupportedLanguage) {
+      if (isNaN(Number(language))) {
+        this.languages.push(language);
+      }
+    }
   }
 
   ngAfterViewInit(): void {
@@ -32,5 +40,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
+  setLanguage(lang: string) {
+    this.translate.use(lang);
+
+  }
 
 }

@@ -1,8 +1,8 @@
 <mat-drawer-container #drawerContainer>
   <mat-drawer #sideNav *ngIf="sideNavShow" mode="side" opened>
     <mat-list>
-      <mat-list-item routerLink="securities">Securities</mat-list-item>
-      <mat-list-item routerLink="accounts">Accounts</mat-list-item>
+      <mat-list-item routerLink="securities">{{ 'securities' | translate }}</mat-list-item>
+      <mat-list-item routerLink="accounts">{{ 'accounts' | translate }}</mat-list-item>
     </mat-list>
   </mat-drawer>
 
@@ -11,7 +11,17 @@
       <button #menuButton mat-icon-button class="menu">
         <mat-icon #menuIcon>menu</mat-icon>
       </button>
-      <span>Portfolio</span>
+
+      <span>{{'portfolio' | translate}}</span>
+
+      <span class="example-spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="lang">
+        <mat-icon>g_translate</mat-icon>
+      </button>
+      <mat-menu #lang="matMenu">
+        <button mat-menu-item *ngFor="let lang of languages"
+                (click)="setLanguage(lang)">{{'language_' + lang | translate}}</button>
+      </mat-menu>
     </div>
 
     <router-outlet></router-outlet>

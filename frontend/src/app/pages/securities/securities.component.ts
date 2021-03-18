@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ChartDataSets, ChartType} from 'chart.js';
 import {Label} from 'ng2-charts';
 import {BackendService} from '../../backend.service';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-securities',
@@ -17,7 +18,7 @@ export class SecuritiesComponent implements OnInit {
   lineChartLegend = true;
   lineChartType: ChartType = 'line';
 
-  constructor(private readonly backend: BackendService) {
+  constructor(private readonly backend: BackendService, private readonly translate: TranslateService) {
   }
 
   ngOnInit(): void {

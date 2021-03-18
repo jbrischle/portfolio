@@ -9,6 +9,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {CustomPipeModule} from '../custom-pipe/custom-pipe.module';
+import {TranslateModule} from "@ngx-translate/core";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [TableComponent],
@@ -18,7 +20,7 @@ import {CustomPipeModule} from '../custom-pipe/custom-pipe.module';
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
-    FormsModule, MatButtonModule, MatSelectModule, ReactiveFormsModule],
+    FormsModule, MatButtonModule, MatSelectModule, ReactiveFormsModule, TranslateModule, MatIconModule],
   exports: [TableComponent]
 })
 export class TableModule {

@@ -9,6 +9,10 @@ import {SecuritiesModule} from './pages/securities/securities.module';
 import {MatButtonModule} from '@angular/material/button';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule, Routes} from '@angular/router';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {HttpClient} from '@angular/common/http';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MatMenuModule} from '@angular/material/menu';
 
 const routes: Routes = [
   {
@@ -25,22 +29,35 @@ const routes: Routes = [
   }
 ];
 
+export function init_translate(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en', loader: {
+        provide: TranslateLoader
+        , useFactory: (init_translate)
+        , deps: [HttpClient]
+      }
+    }),
+    SecuritiesModule,
+    BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,
     MatIconModule,
     MatCommonModule,
-    SecuritiesModule,
     MatButtonModule,
-    BrowserAnimationsModule
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
 }
