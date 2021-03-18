@@ -1,28 +1,46 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {BackendService} from './backend.service';
 import {ChartDataSets, ChartType} from 'chart.js';
-import {Color, Label} from 'ng2-charts';
+import {Label} from 'ng2-charts';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'portfolio';
+
+  @ViewChild('sideNav') sideNav;
+  @ViewChild('menuButton', {read: ElementRef}) menuButton: ElementRef;
+  @ViewChild('menuIcon', {read: ElementRef}) menuIcon: ElementRef;
   data;
   securities;
   lineChartData: ChartDataSets[] = [];
   lineChartLabels: Label[] = [];
   showChart = false;
+  sideNavShow: boolean = false;
 
-  constructor(readonly backend: BackendService) {
+  constructor(private renderer: Renderer2, private readonly backend: BackendService) {
   }
 
   ngOnInit(): void {
     this.backend.getData().subscribe(value => {
       this.data = value;
       this.securities = value?.securities?.security;
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.renderer.listen('window', 'click', (e: Event) => {
+      if (this.sideNav && e.target !== this.sideNav.nativeElement) {
+        console.log(this.sideNav.nativeElement)
+        this.sideNavShow = false;
+      }
+      let menuButtonOrMenuIcon = e.target === this.menuButton.nativeElement || e.target === this.menuIcon.nativeElement;
+      if (menuButtonOrMenuIcon && !this.sideNav) {
+        this.sideNavShow = true;
+      }
     });
   }
 
@@ -38,35 +56,9 @@ export class AppComponent implements OnInit {
     })
     this.lineChartData = lineChartData;
     this.lineChartLabels = lineChartLabels;
-    console.log(this.lineChartData)
   }
 
   public lineChartLegend = true;
+
   public lineChartType: ChartType = 'line';
-  public lineChartColors: Color[] = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // red
-      backgroundColor: 'rgba(255,0,0,0.3)',
-      borderColor: 'red',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
 }

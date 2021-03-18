@@ -22,7 +22,6 @@ export class TableComponent implements AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  // constructor(readonly router: Router) {
   constructor() {
     this.dataSource = new MatTableDataSource(this.data);
   }
