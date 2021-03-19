@@ -21,6 +21,8 @@
     "@angular/platform-browser": "~11.2.3",
     "@angular/platform-browser-dynamic": "~11.2.3",
     "@angular/router": "~11.2.3",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "chart.js": "^2.9.4",
     "fast-xml-parser": "^3.19.0",
     "fs-extra": "^9.1.0",
