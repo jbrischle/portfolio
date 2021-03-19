@@ -16,7 +16,7 @@ app.get('/', (req
     let json = cache.get("portfolio");
     if (!json) {
         json = xmlParser.getJSon();
-        const portfolio = cache.set("portfolio", json);
+        cache.set("portfolio", json);
     }
     return res.send(json);
 
